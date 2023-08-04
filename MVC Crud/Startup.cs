@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVC_Reg
+namespace MVC_Crud
 {
     public class Startup
     {
@@ -50,7 +50,7 @@ namespace MVC_Reg
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Register}/{action=List}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
