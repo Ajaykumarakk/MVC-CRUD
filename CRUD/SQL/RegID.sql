@@ -15,7 +15,7 @@ end
 
 Exec IDInsert 'Ajay Kumar','Ajay@123',9159880650,'Male'
 
-Create procedure IDSelect
+Create  or alter procedure IDSelect
 as
 begin
 Select * from RegID
@@ -29,7 +29,6 @@ begin
 Select * from RegID where Id = @Id;
 end
 
-Exec IDSelect 3
 
 alter procedure IDUpdate(@Id int,@Fullname nvarchar (200),@Email nvarchar (200),@MobileNum bigint,@Gender nvarchar (200))
 as

@@ -1,36 +1,46 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CRUD.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RegLibrary.Model;
+using System.Collections.Generic;
 
 namespace MVC_Crud.Controllers
 {
     public class Register : Controller
     {
-        // GET: Register
-        public ActionResult Index()
+        RegCrud obj;
+        public Register()
         {
-            return View();
+            obj = new RegCrud();
+        }
+        // GET: Register
+        public ActionResult List()
+        {
+            return View("List",new List<RegModel>(obj.Select()));
         }
 
         // GET: Register/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            return View();
+            var res = obj.Select(Id);
+            return View("Details",res);
         }
 
         // GET: Register/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create",new RegModel());
         }
 
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(RegModel reg)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                obj.Insert(reg);
+                return RedirectToAction(nameof(List));
             }
             catch
             {
@@ -39,19 +49,22 @@ namespace MVC_Crud.Controllers
         }
 
         // GET: Register/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
-            return View();
+            var res = obj.Select(Id);
+            return View("Edit",res);
         }
 
         // POST: Register/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, RegModel reg)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                reg.Id = id;
+                obj.Update(reg);
+                return RedirectToAction(nameof(List));
             }
             catch
             {
@@ -60,19 +73,21 @@ namespace MVC_Crud.Controllers
         }
 
         // GET: Register/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int Id)
         {
-            return View();
+            var res = obj.Select(Id);
+            return View("Delete", res);
         }
 
         // POST: Register/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Remove(int Id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                obj.Delete(Id);
+                return RedirectToAction(nameof(List));
             }
             catch
             {

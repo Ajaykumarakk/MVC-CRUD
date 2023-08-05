@@ -11,7 +11,7 @@ namespace RegLibrary.Model
         public int Id { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
-        public int MobileNum { get; set; }
+        public double MobileNum { get; set; }
         public string Gender { get; set; }
     }
 }

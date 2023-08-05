@@ -51,13 +51,13 @@ namespace CRUD.Repository
             }
         }
 
-        public List<RegModel> Select(int Id)
+        public RegModel Select(int Id)
         {
             SqlConnection con = new SqlConnection(Connectionstring);
-            List<RegModel> res = new List<RegModel>();
+            
 
             con.Open();
-            res= con.Query<RegModel>($"Exec IDSelect {Id}").ToList();
+            var res = con.QueryFirst<RegModel>($"Exec IDSelect {Id}");
             con.Close();
 
            return res;
@@ -72,10 +72,10 @@ namespace CRUD.Repository
             res = con.Query<RegModel>("select * from RegID").ToList();
             con.Close();
 
-            foreach(var d in res)
-            {
-                Console.WriteLine($"Id {d.Id},Fullname {d.Fullname},Email {d.Email},Mobileno {d.MobileNum},Gender {d.Gender}");
-            }
+            //foreach(var d in res)
+            //{
+            //    Console.WriteLine($"Id {d.Id},Fullname {d.Fullname},Email {d.Email},Mobileno {d.MobileNum},Gender {d.Gender}");
+            //}
 
             return res;
         }
